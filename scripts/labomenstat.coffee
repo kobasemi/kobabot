@@ -9,8 +9,8 @@
 #
 # Commands:
 #   hubot labomen add - Add you to this system
-#   hubot (登校, 登山, 出席, 出勤) - Change status to login
-#   hubot (下校, 下山, 退席, 退勤, 外出, 帰宅) - Change status to logout
+#   hubot (Message contains <登校, 登山, 出席, 出勤>) - Change status to login
+#   hubot (Message contains <下校, 下山, 退席, 退勤, 外出, 帰宅>) - Change status to logout
 #   hubot labomen list - Show all labomen's status
 #
 # Author:
