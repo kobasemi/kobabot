@@ -9,5 +9,6 @@
   "hubot-redis-brain",
   "hubot-rules",
   "hubot-shipit",
-  "hubot-redmine-notifier"
+  "hubot-redmine-notifier",
+  "hubot-rss-reader"
 ]
