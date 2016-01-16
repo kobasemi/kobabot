@@ -26,6 +26,7 @@ class Labomen
     if sender of @cache == false
       @cache[sender] = "logout"
       @robot.brain.data.labomen = @cache
+      @robot.brain.save()
       return
     else
       return
@@ -33,6 +34,7 @@ class Labomen
     if sender of @cache == true
       @cache[sender] = "login"
       @robot.brain.data.labomen = @cache
+      @robot.brain.save()
       return
     else
       return
@@ -40,6 +42,7 @@ class Labomen
     if sender of @cache == true
       @cache[sender] = "logout"
       @robot.brain.data.labomen = @cache
+      @robot.brain.save()
       return
     else
       return
