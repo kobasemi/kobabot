@@ -16,8 +16,8 @@
 module.exports = (robot) ->
   robot.respond /slack help/i, (msg) ->
     response = """
-      以下のコマンド文字について，前後には半角スペースを一つ入れること
-      Sample: foo *var* val
+      以下のコマンド文字について，前後に別の文字列がある場合は半角スペースを一つずつ入れること
+      Sample: `foo *var* val`
 
       太字: 対象の文字列をアスタリスク `*` で囲む
       斜字: 対象の文字列をアンダーバー `_` で囲む
