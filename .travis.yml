@@ -5,3 +5,10 @@ deploy:
   provider: heroku
   api_key: $HEROKU_API_KEY
   app: $HEROKU_APP_NAME
+notifications:
+  webhooks:
+    urls:
+      - $GITTER_WEBHOOK_URL
+    on_success: always
+    on_failure: always
+    on_start: always
