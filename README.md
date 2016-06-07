@@ -1,6 +1,6 @@
 # kobabot
 
-[![wercker status](https://app.wercker.com/status/8f48313bd12936970466b2ec4f1c887c/s/master "wercker status")](https://app.wercker.com/project/bykey/8f48313bd12936970466b2ec4f1c887c)
+[![Build Status](https://travis-ci.org/kobasemi/kobabot.svg?branch=master)](https://travis-ci.org/kobasemi/kobabot)
 [![Join the chat at https://gitter.im/kobasemi/kobabot](https://badges.gitter.im/kobasemi/kobabot.svg)](https://gitter.im/kobasemi/kobabot?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 kobabot is a chat bot built on the [Hubot][hubot] framework. It was
