@@ -29,7 +29,6 @@ module.exports = (robot) ->
       return err if err
       return body.Error if res == 400
       response = '次の高槻行きバスは，'+body.Hour+':'+body.Minute+'です'
-      console.log response
       msg.send response
 
   robot.respond /.*(富田へ).*/i, (msg) ->
@@ -40,7 +39,6 @@ module.exports = (robot) ->
       return err if err
       return body.Error if res == 400
       response = '次の富田行きバスは，'+body.Hour+':'+body.Minute+'です'
-      console.log response
       msg.send response
 
   robot.respond /.*(高槻から).*/i, (msg) ->
@@ -51,7 +49,6 @@ module.exports = (robot) ->
       return err if err
       return body.Error if res == 400
       response = '次の関大行きバスは，'+body.Hour+':'+body.Minute+'です'
-      console.log response
       msg.send response
 
   robot.respond /.*(富田から).*/i, (msg) ->
@@ -62,5 +59,4 @@ module.exports = (robot) ->
       return err if err
       return body.Error if res == 400
       response = '次の関大行きバスは，'+body.Hour+':'+body.Minute+'です'
-      console.log response
       msg.send response
