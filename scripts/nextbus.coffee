@@ -27,6 +27,7 @@ class Nextbus
       json: true
 
     request.get options, (err, res, body) ->
+      console.log res
       return err if err
       return body.Error if res == 400
       destination = ''
@@ -43,17 +44,21 @@ module.exports = (robot) ->
   nextbus = new Nextbus
 
   robot.respond /.*(高槻へ).*/i, (msg) ->
+    console.log 'to-takatsuki'
     response =  nextbus.next 'to-takatsuki'
     msg.send response
 
   robot.respond /.*(富田へ).*/i, (msg) ->
+    console.log 'to-tonda'
     response =  nextbus.next 'to-tonda'
     msg.send response
 
   robot.respond /.*(高槻から).*/i, (msg) ->
+    console.log 'from-takatsuki'
     response =  nextbus.next 'from-takatsuki'
     msg.send response
 
   robot.respond /.*(富田から).*/i, (msg) ->
+    console.log 'from-tonda'
     response =  nextbus.next 'from-tonda'
     msg.send response
