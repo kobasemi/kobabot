@@ -20,47 +20,47 @@
 request = require 'request'
 baseurl = 'https://kutcbus.appspot.com/api/v1/next-bus/'
 
-class Nextbus
-  next: (word) ->
-    console.log word
+module.exports = (robot) ->
+  robot.respond /.*(高槻へ).*/i, (msg) ->
     options =
-      url: baseurl + word
+      url: baseurl + 'to-takatsuki'
       json: true
-
-    console.log url
     request.get options, (err, res, body) ->
-      console.log res
       return err if err
       return body.Error if res == 400
-      destination = ''
-      if word == 'to-takatsuki'
-        destination = '高槻'
-      else if word == 'to-tonda'
-        destination = '富田'
-      else
-        destination = '関大'
-      response = '次の'+destination+'行きバスは，'+body.Hour+':'+body.Minute+'です'
-      response
-
-module.exports = (robot) ->
-  nextbus = new Nextbus
-
-  robot.respond /.*(高槻へ).*/i, (msg) ->
-    console.log 'to-takatsuki'
-    response =  nextbus.next 'to-takatsuki'
-    msg.send response
+      response = '次の高槻行きバスは，'+body.Hour+':'+body.Minute+'です'
+      console.log response
+      msg.send response
 
   robot.respond /.*(富田へ).*/i, (msg) ->
-    console.log 'to-tonda'
-    response =  nextbus.next 'to-tonda'
-    msg.send response
+    options =
+      url: baseurl + 'to-tonda'
+      json: true
+    request.get options, (err, res, body) ->
+      return err if err
+      return body.Error if res == 400
+      response = '次の富田行きバスは，'+body.Hour+':'+body.Minute+'です'
+      console.log response
+      msg.send response
 
   robot.respond /.*(高槻から).*/i, (msg) ->
-    console.log 'from-takatsuki'
-    response =  nextbus.next 'from-takatsuki'
-    msg.send response
+    options =
+      url: baseurl + 'from-takatsuki'
+      json: true
+    request.get options, (err, res, body) ->
+      return err if err
+      return body.Error if res == 400
+      response = '次の関大行きバスは，'+body.Hour+':'+body.Minute+'です'
+      console.log response
+      msg.send response
 
   robot.respond /.*(富田から).*/i, (msg) ->
-    console.log 'from-tonda'
-    response =  nextbus.next 'from-tonda'
-    msg.send response
+    options =
+      url: baseurl + 'from-tonda'
+      json: true
+    request.get options, (err, res, body) ->
+      return err if err
+      return body.Error if res == 400
+      response = '次の関大行きバスは，'+body.Hour+':'+body.Minute+'です'
+      console.log response
+      msg.send response
