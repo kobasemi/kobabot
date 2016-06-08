@@ -22,10 +22,12 @@ baseurl = 'https://kutcbus.appspot.com/api/v1/next-bus/'
 
 class Nextbus
   next: (word) ->
+    console.log word
     options =
       url: baseurl + word
       json: true
 
+    console.log url
     request.get options, (err, res, body) ->
       console.log res
       return err if err
