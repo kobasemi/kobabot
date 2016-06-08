@@ -60,3 +60,22 @@ module.exports = (robot) ->
       return body.Error if res.statusCode == 400
       response = '次の関大行きバスは，'+body.Hour+':'+body.Minute+'です'
       msg.send response
+
+  robot.hear /^\s*bus\s*(?:(f(?:r|ro|rom)?|to?)\s*((?:to(?:n|nd|nda)?)|(?:ta(?:k|ka|kat|kats|katsu|katsuk|katsuki)?))?)?\s*$/i, (msg) ->
+    if msg.match[1]
+      direction = if msg.match[1].substr(0) == "t" then "to" else "from"
+      if msg.match[2]
+        [place, place_ja] = if msg.match[2].substr(0, 2) == "to" then ["tonda", "富田"] else ["takatsuki", "高槻"]
+        place_ja = if direction == "from" then "関大" else place_ja
+        options =
+          url: baseurl + direction + '-' + place
+          json: true
+        request.get options, (err, res, body) ->
+          return err if err
+          return body.Error if res == 400
+          response = '次の'+place_ja+'行きバスは，'+body.Hour+':'+body.Minute+'です'
+          msg.send response
+      else
+        msg.send "This function does not work yet."
+    else
+      msg.send "This function does not work yet."
