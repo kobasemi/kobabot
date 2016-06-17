@@ -27,7 +27,7 @@ module.exports = (robot) ->
       json: true
     request.get options, (err, res, body) ->
       return err if err
-      return body.Error if res == 400
+      return body.Error if res.statusCode == 400
       response = '次の高槻行きバスは，'+body.Hour+':'+body.Minute+'です'
       msg.send response
 
@@ -37,7 +37,7 @@ module.exports = (robot) ->
       json: true
     request.get options, (err, res, body) ->
       return err if err
-      return body.Error if res == 400
+      return body.Error if res.statusCode == 400
       response = '次の富田行きバスは，'+body.Hour+':'+body.Minute+'です'
       msg.send response
 
@@ -47,7 +47,7 @@ module.exports = (robot) ->
       json: true
     request.get options, (err, res, body) ->
       return err if err
-      return body.Error if res == 400
+      return body.Error if res.statusCode == 400
       response = '次の関大行きバスは，'+body.Hour+':'+body.Minute+'です'
       msg.send response
 
@@ -57,6 +57,6 @@ module.exports = (robot) ->
       json: true
     request.get options, (err, res, body) ->
       return err if err
-      return body.Error if res == 400
+      return body.Error if res.statusCode == 400
       response = '次の関大行きバスは，'+body.Hour+':'+body.Minute+'です'
       msg.send response
