@@ -96,7 +96,7 @@ module.exports = (robot) ->
     takatsuki: "高槻"
     tonda    : "富田"
 
-  robot.hear /^\s*(?:bus|バス|:bus:)(\s+.*)?\s*$/i, (msg) ->
+  robot.respond /^\s*(?:bus|バス|:bus:)(\s+.*)?\s*$/i, (msg) ->
     Util = require "util"
 
     request_query = {queries: [
