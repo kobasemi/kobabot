@@ -132,25 +132,29 @@ module.exports = (robot) ->
         switch true
           # captured c(ounts) NUMBER
           when /^c(?:o|ou|oun|ount|ounts)?$/.test(opts[i])
-            request_query.queries.map((x) -> x.counts = parseInt(opts[++i], 10))
+            request_query.queries.map((x) -> x.counts = parseInt(opts[i+1], 10))
+            i += 1
           # captured cNUMBER
           when /^c(\d+)?$/.test(opts[i])
             request_query.queries.map((x) -> x.counts = parseInt(opts[i].substring(1), 10))
           # captured d(ays) NUMBER
           when /^d(?:a|ay|ays)?$/.test(opts[i])
-            request_query.queries.map((x) -> x.days = parseInt(opts[++i], 10))
+            request_query.queries.map((x) -> x.days = parseInt(opts[i+1], 10))
+            i += 1
           # captured dNUMBER
           when /^d(\d+)?$/.test(opts[i])
             request_query.queries.map((x) -> x.days = parseInt(opts[i].substring(1), 10))
           # captured h(ours) NUMBER
           when /^h(?:o|ou|our|ours)?$/.test(opts[i])
-            request_query.queries.map((x) -> x.hours = parseInt(opts[++i], 10))
+            request_query.queries.map((x) -> x.hours = parseInt(opts[i+1], 10))
+            i += 1
           # captured hNUMBER
           when /^h(\d+)?$/.test(opts[i])
             request_query.queries.map((x) -> x.hours = parseInt(opts[i].substring(1), 10))
           # captured m(inutes) NUMBER
           when /^m(?:i|in|inu|inut|inute|inutes)?$/.test(opts[i])
-            request_query.queries.map((x) -> x.minutes = parseInt(opts[++i], 10))
+            request_query.queries.map((x) -> x.minutes = parseInt(opts[i+1], 10))
+            i += 1
           # captured mNUMBER
           when /^m(\d+)?$/.test(opts[i])
             request_query.queries.map((x) -> x.minutes = parseInt(opts[i].substring(1), 10))
