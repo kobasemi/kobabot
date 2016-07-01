@@ -78,17 +78,17 @@ module.exports = (robot) ->
       ta[katsuki]         Takatsuki / 高槻
 
   OPTION:
-    c[ounts]  NUMBER      get next bus info counts times
-    d[ays]    NUMBER      get next bus info after days
-    h[ours]   NUMBER      get next bus info after hours
-    m[inutes] NUMBER      get next bus info after minutes
+    c[ounts]   NUMBER      get next bus info counts times
+    ad[ays]    NUMBER      get next bus info after days
+    ah[ours]   NUMBER      get next bus info after hours
+    am[inutes] NUMBER      get next bus info after minutes
 
   EXAMPLE:
     bus                   get next bus info from kutc to tonda and takatsuki,
                           from tonda and takatsuki to kutc
     bus f                 get next bus info from tonda and takatsuki to kutc
     bus t to c 10         get next bus info ten times from kutc to tonda
-    bus m 30              get next bus info after 30 minutes
+    bus am 30              get next bus info after 30 minutes
   """
 
   place_ja =
@@ -137,26 +137,26 @@ module.exports = (robot) ->
           # captured cNUMBER
           when /^c(\d+)?$/.test(opts[i])
             request_query.queries.map((x) -> x.counts = parseInt(opts[i].substring(1), 10))
-          # captured d(ays) NUMBER
-          when /^d(?:a|ay|ays)?$/.test(opts[i])
+          # captured ad(ays) NUMBER
+          when /^ad(?:a|ay|ays)?$/.test(opts[i])
             request_query.queries.map((x) -> x.days = parseInt(opts[i+1], 10))
             i += 1
-          # captured dNUMBER
-          when /^d(\d+)?$/.test(opts[i])
+          # captured adNUMBER
+          when /^ad(\d+)?$/.test(opts[i])
             request_query.queries.map((x) -> x.days = parseInt(opts[i].substring(1), 10))
-          # captured h(ours) NUMBER
-          when /^h(?:o|ou|our|ours)?$/.test(opts[i])
+          # captured ah(ours) NUMBER
+          when /^ah(?:o|ou|our|ours)?$/.test(opts[i])
             request_query.queries.map((x) -> x.hours = parseInt(opts[i+1], 10))
             i += 1
-          # captured hNUMBER
-          when /^h(\d+)?$/.test(opts[i])
+          # captured ahNUMBER
+          when /^ah(\d+)?$/.test(opts[i])
             request_query.queries.map((x) -> x.hours = parseInt(opts[i].substring(1), 10))
-          # captured m(inutes) NUMBER
-          when /^m(?:i|in|inu|inut|inute|inutes)?$/.test(opts[i])
+          # captured am(inutes) NUMBER
+          when /^am(?:i|in|inu|inut|inute|inutes)?$/.test(opts[i])
             request_query.queries.map((x) -> x.minutes = parseInt(opts[i+1], 10))
             i += 1
-          # captured mNUMBER
-          when /^m(\d+)?$/.test(opts[i])
+          # captured amNUMBER
+          when /^am(\d+)?$/.test(opts[i])
             request_query.queries.map((x) -> x.minutes = parseInt(opts[i].substring(1), 10))
           else
             msg.send "bus: illegal option -- " + opts[i] + "*"
