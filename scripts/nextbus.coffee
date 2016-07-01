@@ -177,6 +177,6 @@ module.exports = (robot) ->
       for result in body.results
         msg.send place_ja[result.From] + ' -> ' + place_ja[result.To]
         if result.Error
-          msg.send 'エラーface_with_rolling_eyes: : ' + result.Error
+          msg.send 'エラー :face_with_rolling_eyes:' + result.Error
           continue
         msg.send (bus.Hour + ':' + bus.Minute for bus in result.Buses).join(' | ')
