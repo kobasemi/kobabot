@@ -8,8 +8,8 @@
 #   None
 #
 # Commands:
-#   hubot (Message contains <登校, 登山, 出席, 出勤>) - Change status to login
-#   hubot (Message contains <下校, 下山, 退席, 退勤, 外出, 帰宅>) - Change status to logout
+#   hubot (Message contains <登校, 登山, 出席, 出勤, 移動, 外出>) - Remember message with bold text
+#   hubot (Message contains <下校, 下山, 退席, 退勤, 帰宅>) - Remember message with normal text
 #   hubot labomen list - Show all labomen's status
 #   hubot labomen reset - Reset status table
 #
@@ -22,13 +22,13 @@ class Labomen
     @robot.brain.on 'loaded', =>
       if @robot.brain.data.labomen
         @cache = @robot.brain.data.labomen
-  login: (sender) ->
-    @cache[sender] = "login"
+  login: (sender, message) ->
+    @cache[sender] = "*"+message+"*"
     @robot.brain.data.labomen = @cache
     @robot.brain.save()
     return
-  logout: (sender) ->
-    @cache[sender] = "logout"
+  logout: (sender, message) ->
+    @cache[sender] = message
     @robot.brain.data.labomen = @cache
     @robot.brain.save()
     return
@@ -43,11 +43,11 @@ class Labomen
 module.exports = (robot) ->
   labomen = new Labomen robot
 
-  robot.respond /.*(登校|登山|出席|出勤).*/i, (msg) ->
-    labomen.login msg.message.user.name
+  robot.respond /.*(登校|登山|出席|出勤|移動|外出).*/i, (msg) ->
+    labomen.login(msg.message.user.name, msg.message.text)
 
-  robot.respond /.*(下校|下山|退席|退勤|外出|帰宅).*/i, (msg) ->
-    labomen.logout msg.message.user.name
+  robot.respond /.*(下校|下山|退席|退勤|帰宅).*/i, (msg) ->
+    labomen.logout(msg.message.user.name, msg.message.text)
 
   robot.respond /labomen list/i, (msg) ->
     response = ""
