@@ -44,11 +44,11 @@ module.exports = (robot) ->
   labomen = new Labomen robot
 
   robot.respond /.*(登校|登山|出席|出勤|移動|外出).*/i, (msg) ->
-    message = msg.message.text.split(" ").splice(0, 1).join(" ")
+    message = msg.message.text.replace("@", "").replace("kbot", "").trim()
     labomen.login(msg.message.user.name, message)
 
   robot.respond /.*(下校|下山|退席|退勤|帰宅).*/i, (msg) ->
-    message = msg.message.text.split(" ").splice(0, 1).join(" ")
+    message = msg.message.text.replace("@", "").replace("kbot", "").trim()
     labomen.logout(msg.message.user.name, message)
 
   robot.respond /labomen list/i, (msg) ->
