@@ -46,15 +46,6 @@ class Labomen
     date = d.getDate()
     hour = d.getHours()
     min = d.getMinutes()
-    sec = d.getSeconds()
-    now = "#{year}-#{month}-#{date} #{hour}:#{min}:#{sec}"
-
-    d = new Date now+" +0900"
-    year = d.getFullYear()
-    month = d.getMonth() + 1
-    date = d.getDate()
-    hour = d.getHours()
-    min = d.getMinutes()
     "#{year}/#{month}/#{date} #{hour}:#{min}"
 
 
