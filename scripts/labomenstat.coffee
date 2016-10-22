@@ -39,13 +39,16 @@ class Labomen
     @robot.brain.data.labomen = @cache
     @robot.brain.save()
     return
+  add_zero: (num) ->
+    num = "0"+num if num.toString().length is 1
+    return num
   get_date_time: ->
     d = new Date
     year = d.getFullYear()
-    month = d.getMonth() + 1
-    date = d.getDate()
-    hour = d.getHours()
-    min = d.getMinutes()
+    month = this.add_zero(d.getMonth() + 1)
+    date = this.add_zero(d.getDate())
+    hour = this.add_zero(d.getHours())
+    min = this.add_zero(d.getMinutes())
     "#{year}/#{month}/#{date} #{hour}:#{min}"
 
 
