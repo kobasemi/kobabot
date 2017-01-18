@@ -95,26 +95,29 @@ module.exports = (robot) ->
     kutc     : "関大"
     takatsuki: "高槻"
     tonda    : "富田"
+  place_emoji =
+    kutc      : ":school:"
+    takatsuki : ":station:"
+    tonda     : ":station:"
 
-  robot.hear /\s*(?:bus|バス|:bus:)(\s+.*)?\s*$/i, (msg) ->
+  call_yabus = (msg_handler, msgargs) ->
     Util = require "util"
 
     request_query = {queries: [
-      {from: "kutc"     , to: "takatsuki", counts: 3}
       {from: "takatsuki", to: "kutc"     , counts: 3}
-      {from: "kutc"     , to: "tonda"    , counts: 3}
+      {from: "kutc"     , to: "takatsuki", counts: 3}
       {from: "tonda"    , to: "kutc"     , counts: 3}
+      {from: "kutc"     , to: "tonda"    , counts: 3}
     ]}
 
     # Below pattern: (f[rom]|t[o]) (to[nda]|ta[katsuki]) (...)
     parser_re = /^\s*(?:(f(?:r|ro|rom)?|to?|h(?:e|el|elp)?)(?:\s+((?:to(?:n|nd|nda)?)|(?:ta(?:k|ka|kat|kats|katsu|katsuk|katsuki)?)))?)?(?:\s+(.*))?$/
-    cmds = parser_re.exec(msg.match[1])
+    cmds = parser_re.exec(msgargs)
 
     if cmds
       if cmds[1]
         if cmds[1][0] == "h"
-          msg.send USAGE_MSG
-          return
+          msg_handler.send USAGE_MSG
         direction = if cmds[1][0] == "f" then "from" else "to"
         request_query.queries = request_query.queries.filter((x) -> x[direction] != "kutc")
 
@@ -159,8 +162,7 @@ module.exports = (robot) ->
           when /^am(\d+)?$/.test(opts[i])
             request_query.queries.map((x) -> x.minutes = parseInt(opts[i].substring(1), 10))
           else
-            msg.send "bus: illegal option -- " + opts[i] + "*"
-            msg.send USAGE_MSG
+            msg_handler.send "bus: illegal option -- " + opts[i] + " :no_good:\n\n" + USAGE_MSG
             return
         ++i
 
@@ -173,10 +175,19 @@ module.exports = (robot) ->
       return err if err
       return body.Error if res.statusCode == 400
 
-      msg.send ':bus:'
+      respond_data = ""
       for result in body.results
-        msg.send place_ja[result.From] + ' -> ' + place_ja[result.To]
+        respond_data += place_emoji[result.From] + " " + place_ja[result.From] + ' >>> ' + place_ja[result.To] + " " + place_emoji[result.To] + '\n'
         if result.Error
-          msg.send 'エラー :face_with_rolling_eyes:' + result.Error
+          respond_data += 'エラー :face_with_rolling_eyes:' + result.Error + '\n'
           continue
-        msg.send (bus.Hour + ':' + bus.Minute for bus in result.Buses).join(' | ')
+        respond_data += '  ' + (String("  " + bus.Hour).slice(-2) + ':' + String("  " + bus.Minute).slice(-2) for bus in result.Buses).join('  |  ') + '\n'
+      msg_handler.send respond_data
+
+  regex = /\s*(?:bus|バス|:bus:)(\s+.*)?\s*$/i
+  robot.hear regex, (msg) ->
+    call_yabus msg, msg.match[1]
+
+  HubotSlack = require 'hubot-slack'
+  robot.listeners.push new HubotSlack.SlackBotListener robot, regex, (msg) ->
+    call_yabus msg, msg.match[1]
