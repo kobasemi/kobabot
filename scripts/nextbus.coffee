@@ -181,7 +181,7 @@ module.exports = (robot) ->
         if result.Error
           respond_data += 'エラー :face_with_rolling_eyes:' + result.Error + '\n'
           continue
-        respond_data += '  ' + (String("  " + bus.Hour).slice(-2) + ':' + String("  " + bus.Minute).slice(-2) for bus in result.Buses).join('  |  ') + '\n'
+        respond_data += '  ' + (String("00" + bus.Hour).slice(-2) + ':' + String("00" + bus.Minute).slice(-2) for bus in result.Buses).join('  |  ') + '\n'
       msg_handler.send respond_data
 
   regex = /\s*(?:bus|バス|:bus:)(\s+.*)?\s*$/i
