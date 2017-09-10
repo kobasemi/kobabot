@@ -188,6 +188,9 @@ module.exports = (robot) ->
   robot.hear regex, (msg) ->
     call_yabus msg, msg.match[1]
 
-  HubotSlack = require 'hubot-slack'
-  robot.listeners.push new HubotSlack.SlackBotListener robot, regex, (msg) ->
-    call_yabus msg, msg.match[1]
+  # Below code may no longer need.
+  # ref.) https://github.com/slackapi/hubot-slack/issues/198#issuecomment-301954539
+  #
+  # HubotSlack = require 'hubot-slack'
+  # robot.listeners.push new HubotSlack.SlackBotListener robot, regex, (msg) ->
+  #   call_yabus msg, msg.match[1]
