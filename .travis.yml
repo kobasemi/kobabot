@@ -2,10 +2,11 @@ language: node_js
 node_js:
   - "0.10"
 
-deploy:
-  provider: heroku
-  api_key: $HEROKU_API_KEY
-  app: $HEROKU_APP_NAME
+# Note: no longer use heroku
+# deploy:
+#   provider: heroku
+#   api_key: $HEROKU_API_KEY
+#   app: $HEROKU_APP_NAME
 
 #notifications:
 #  webhooks:
