@@ -5,4 +5,4 @@ set -e
 npm install
 export PATH="node_modules/.bin:node_modules/hubot/node_modules/.bin:$PATH"
 
-exec HUBOT_SLACK_TOKEN=$SLACK_TOKEN node_modules/.bin/hubot --name "kobabot" -a slack "$@"
+HUBOT_SLACK_TOKEN=$SLACK_TOKEN node_modules/.bin/hubot --name "kobabot" -a slack "$@"
